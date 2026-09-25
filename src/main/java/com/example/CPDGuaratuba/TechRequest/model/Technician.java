@@ -1,14 +1,13 @@
 package com.example.CPDGuaratuba.TechRequest.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
+
 @Entity
-public class TechnicianModel {
+public class Technician {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,6 +15,12 @@ public class TechnicianModel {
     private String name;
     @NotBlank
     private String phone;
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    @NotBlank
+    private TechnicianRole role;
+    @OneToMany(mappedBy = "technician")
+    private List<Ticket> tickets;
 
     public Long getId() {
         return id;
@@ -34,5 +39,11 @@ public class TechnicianModel {
     }
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    public TechnicianRole getRole() {
+        return role;
+    }
+    public void setRole(TechnicianRole role) {
+        this.role = role;
     }
 }
