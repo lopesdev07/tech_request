@@ -3,6 +3,7 @@ package com.example.CPDGuaratuba.TechRequest.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -15,9 +16,8 @@ public class Technician {
     private String name;
     @NotBlank
     private String phone;
-    @NotBlank
     @Enumerated(EnumType.STRING)
-    @NotBlank
+    @NotNull
     private TechnicianRole role;
     @OneToMany(mappedBy = "technician")
     private List<Ticket> tickets;

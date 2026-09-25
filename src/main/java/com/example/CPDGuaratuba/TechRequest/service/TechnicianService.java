@@ -26,9 +26,15 @@ public class TechnicianService {
     }
 
     public Technician findTechnicianByName(String name) {
-        return repository.findFirstTechnicianByName(name).orElse(null);
-
+        return repository.findFirstTechnicianByName(name)
+                .orElseThrow(() -> new NoSuchElementException("No technician found with this name"));
     }
 
+    public void deleteTechnicianById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new NoSuchElementException("No technician found with this id");
+        }
+        repository.deleteById(id);
+    }
 
 }
