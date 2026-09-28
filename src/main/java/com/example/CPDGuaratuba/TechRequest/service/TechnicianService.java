@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class TechnicianService {
@@ -17,8 +18,13 @@ public class TechnicianService {
 
     TechnicianRepository repository;
 
-    public void saveUser(Technician technician) {
-        repository.save(technician);
+    public Technician saveTechnician(Technician technician) {
+        return repository.save(technician);
+    }
+    
+    public Technician findTechnicianById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("No technician found with this id"));
     }
 
     public List<Technician> filterTechnicianByRole(TechnicianRole role) {
