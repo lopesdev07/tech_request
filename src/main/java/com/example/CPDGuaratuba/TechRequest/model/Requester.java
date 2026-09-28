@@ -17,7 +17,7 @@ public class Requester { // maybe use a valid local government credential or smt
     private String phone;
     @Enumerated(EnumType.STRING)
     @NotNull
-    private RequesterDepartment deparment;
+    private RequesterDepartment department;
     @OneToMany(mappedBy = "requester")
     private List<Ticket> tickets;
 
@@ -46,11 +46,11 @@ public class Requester { // maybe use a valid local government credential or smt
     }
 
     public RequesterDepartment getDeparment() {
-        return deparment;
+        return department;
     }
 
-    public void setDeparment(RequesterDepartment deparment) {
-        this.deparment = deparment;
+    public void setDepartment(RequesterDepartment department) {
+        this.department = department;
     }
 
 
