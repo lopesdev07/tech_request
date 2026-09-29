@@ -45,7 +45,7 @@ public class Requester { // maybe use a valid local government credential or smt
         this.phone = phone;
     }
 
-    public RequesterDepartment getDeparment() {
+    public RequesterDepartment getDepartment() {
         return department;
     }
 
