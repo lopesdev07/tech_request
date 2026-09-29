@@ -1,11 +1,13 @@
 package com.example.CPDGuaratuba.TechRequest.service;
 
 import com.example.CPDGuaratuba.TechRequest.model.Requester;
-import com.example.CPDGuaratuba.TechRequest.model.Technician;
+import com.example.CPDGuaratuba.TechRequest.model.RequesterDepartment;
 import com.example.CPDGuaratuba.TechRequest.repository.RequesterRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class RequesterService {
@@ -15,9 +17,11 @@ public class RequesterService {
 
     RequesterRepository repository;
 
-    public Requester findFirstRequesterByName(String name) {
-        return repository.findFirstRequesterByName(name)
-                .orElseThrow(() -> new NoSuchElementException("No requester found with this name"));
+    public List<Requester> findRequesters(String name, RequesterDepartment department) {
+        return repository.findAll().stream()
+                .filter(r -> name == null || r.getName().toLowerCase().contains(name.toLowerCase()))
+                .filter(r -> department == null || r.getDepartment() == department)
+                .collect(Collectors.toList());
     }
 
     public Requester findRequesterById(Long id) {
