@@ -20,19 +20,14 @@ public class TechnicianController {
         this.service = service;
     }
 
-    @GetMapping("findTechByName")
-    Technician findTechnicianByName(@RequestParam String name) {
-        return service.findTechnicianByName(name);
+    @GetMapping
+    List<Technician> findTechnicians(@RequestParam(required = false) String name, @RequestParam(required = false) TechnicianRole role) {
+        return service.findTechnicians(name, role);
     }
 
-    @GetMapping("findTechId/{id}")
+    @GetMapping("/{id}")
     Technician findTechnicianById(@PathVariable Long id) {
         return service.findTechnicianById(id);
-    }
-
-    @GetMapping("filterTechByRole")
-    List<Technician> filterTechnicianByRole(@RequestParam TechnicianRole role) {
-        return service.filterTechnicianByRole(role);
     }
 
     @PostMapping
