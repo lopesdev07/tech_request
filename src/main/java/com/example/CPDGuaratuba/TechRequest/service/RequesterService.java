@@ -35,7 +35,7 @@ public class RequesterService {
 
     public void deleteRequesterById(Long id) {
         if (!repository.existsById(id)) {
-            throw new NoSuchElementException("No technician found with this id");
+            throw new NoSuchElementException("No requester found with this id");
         }
         repository.deleteById(id);
 
