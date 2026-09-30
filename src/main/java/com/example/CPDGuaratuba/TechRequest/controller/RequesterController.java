@@ -36,8 +36,8 @@ public class RequesterController {
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    @DeleteMapping
-    ResponseEntity<Void> deleteRequesterById(Long id) {
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deleteRequesterById(@PathVariable Long id) {
         service.deleteRequesterById(id);
         return ResponseEntity.noContent().build();
     }
