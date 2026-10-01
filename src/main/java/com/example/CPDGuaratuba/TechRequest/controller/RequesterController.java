@@ -7,7 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,9 +33,14 @@ public class RequesterController {
     }
 
     @PostMapping
-    ResponseEntity<Requester> saveRequester(@Valid @RequestBody Requester requester) {
+    ResponseEntity<Requester> saveRequester(@Valid @RequestBody Requester requester, UriComponentsBuilder uriBuilder) {
         Requester saved = service.saveRequester(requester);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+
+        URI location = uriBuilder.path("/v1/requesters/{id}")
+                .buildAndExpand(requester.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(saved);
     }
 
     @DeleteMapping("/{id}")
