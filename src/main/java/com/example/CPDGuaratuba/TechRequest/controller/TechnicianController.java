@@ -7,7 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,9 +33,15 @@ public class TechnicianController {
     }
 
     @PostMapping
-    ResponseEntity<Technician> saveTechnician(@Valid @RequestBody Technician technician) {
+    ResponseEntity<Technician> saveTechnician(@Valid @RequestBody Technician technician, UriComponentsBuilder uriBuilder) {
         Technician saved = service.saveTechnician(technician);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved); // maybe switch to .created() when i can handle uri
+
+        URI location = uriBuilder.path("/v1/technicians/{id}")
+                .buildAndExpand(technician.getId())
+                .toUri();
+
+
+        return ResponseEntity.created(location).body(saved);
     }
 
     @DeleteMapping("/{id}")
