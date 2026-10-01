@@ -2,6 +2,7 @@ package com.example.CPDGuaratuba.TechRequest.service;
 
 import com.example.CPDGuaratuba.TechRequest.dto.TicketAssignRequest;
 import com.example.CPDGuaratuba.TechRequest.dto.TicketCreateRequest;
+import com.example.CPDGuaratuba.TechRequest.dto.TicketStatusUpdateRequest;
 import com.example.CPDGuaratuba.TechRequest.model.Requester;
 import com.example.CPDGuaratuba.TechRequest.model.Technician;
 import com.example.CPDGuaratuba.TechRequest.model.Ticket;
@@ -65,6 +66,13 @@ public class TicketService {
             return repository.save(ticket);
     }
 
+    public Ticket updateTicketStatus(Long ticketId, TicketStatusUpdateRequest ticketStatusUpdate) {
+        Ticket ticket = findTicketById(ticketId);
+        if (ticketStatusUpdate.status() == TicketStatus.CLOSED) {
+            ticketStatusUpdate.status()
+        }
+
+    }
 
 
 }
